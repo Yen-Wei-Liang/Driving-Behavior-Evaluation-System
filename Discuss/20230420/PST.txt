@@ -1,0 +1,19 @@
+Introduction
+This project implements in python 2 algorithms for variable order markov models called Predict by Partial Match (PPM) and Probabilistic Suffix Tree (PST). 
+
+https://github.com/rpgomez/vomm
+
+
+
+
+About
+Probabilistic suffix tree (PST) is one of widely used sequence indexing technique which serves a model for prediction. The probabilistic generalized suffix tree (PGST) is a variant of PST and is essentially a suffix tree built from a huge number of smaller sequences
+
+
+https://github.com/Man-ash/Probabilistic-Suffix-Tree-Experiment
+
+
+
+probabilistic-suffix-trees
+
+https://github.com/OldDriver-Lab/my-probabilistic-suffix-trees
