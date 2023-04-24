@@ -76,6 +76,7 @@ Case_3.csv: Normalization + PCA (4 elements) + Kmean (divided into 5 groups)
 ## Case1 : Centers
 
 ||X-axis Angular Velocity|Y-axis Angular Velocity|Z-axis Angular Velocity|X-axis Acceleration|Y-axis Acceleration|Z-axis Acceleration|X-axis Angle|Y-axis Angle|Z-axis Angle|
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 |Group 0|0.709223555|0.733413843|0.206165427|0.355683052|0.534956072|0.604279648|0.420169569|0.741768367|0.131780889|
 |Group 1|0.431342918|0.411600086|0.688949873|0.445824701|0.515307789|0.605584159|0.411932711|0.677216222|0.138203881|
 |Group 2|0.713007164|0.705948145|0.217150747|0.509190213|0.334886101|0.616319834|0.233106304|0.527913106|0.156434844|
@@ -88,6 +89,7 @@ Case_3.csv: Normalization + PCA (4 elements) + Kmean (divided into 5 groups)
 ## Case 2 : Normalization + PCA(9) + Kmean
 
 |Action|Base Action|Number|Rate|
+|:-:|:-:|:-:|:-:|
 |Go straight 1|0|12|23.08|
 |Go straight 1|1|0|0|
 |Go straight 1|2|12|23.08|
@@ -152,7 +154,8 @@ Case_3.csv: Normalization + PCA (4 elements) + Kmean (divided into 5 groups)
 
 ## Case2 : Centers
 
-|Component 1|Component 2|Component 3|Component 4|Component 5|Component 6|Component 7|Component 8|Component 9|
+||Component 1|Component 2|Component 3|Component 4|Component 5|Component 6|Component 7|Component 8|Component 9|
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 |Group 0|-0.14136422|0.098940355|-0.075854349|-0.023293167|-0.025273801|0.002695079|-0.008050485|-0.017050601|-0.005195443|
 |Group 1|0.501098191|0.025172289|0.003413016|-0.006213414|-0.010176565|-0.006264785|-0.007058141|-0.001821962|0.000895609|
 |Group 2|-0.139746109|0.387128209|0.164105228|0.026858622|0.078411574|0.0045789|0.023836205|0.034673309|0.010552249|
@@ -166,6 +169,7 @@ Case_3.csv: Normalization + PCA (4 elements) + Kmean (divided into 5 groups)
 
 
 |Action|Base Action|Number|Rate|
+|:-:|:-:|:-:|:-:|
 |Go straight 1|0|15|28.85|
 |Go straight 1|1|2|3.85|
 |Go straight 1|2|11|21.15|
@@ -230,7 +234,8 @@ Case_3.csv: Normalization + PCA (4 elements) + Kmean (divided into 5 groups)
 
 ## Case3 : Centers
 
-|Component 5|Component 6|Component 7|Component 9|
+||Component 5|Component 6|Component 7|Component 9|
+|:-:|:-:|:-:|:-:|:-:|
 |Group 0|0.029911107|0.068532348|-0.034005581|-0.001832198|
 |Group 1|0.286265631|0.317287546|0.038190456|-0.021470701|
 |Group 2|-0.02846863|-0.085903692|-0.056282232|-0.005875602|
