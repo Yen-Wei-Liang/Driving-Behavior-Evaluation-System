@@ -1,0 +1,61 @@
+,Action,Base Action,Number,Rate
+0,Idle 1,0,52,89.66
+1,Idle 1,1,0,0.0
+2,Idle 1,2,6,10.34
+3,Idle 1,3,0,0.0
+4,Idle 1,4,0,0.0
+5,Go straight 1,0,12,23.08
+6,Go straight 1,1,10,19.23
+7,Go straight 1,2,18,34.62
+8,Go straight 1,3,0,0.0
+9,Go straight 1,4,12,23.08
+10,Turn right 1,0,31,42.47
+11,Turn right 1,1,8,10.96
+12,Turn right 1,2,18,24.66
+13,Turn right 1,3,0,0.0
+14,Turn right 1,4,16,21.92
+15,Trun left 1,0,22,29.33
+16,Trun left 1,1,11,14.67
+17,Trun left 1,2,25,33.33
+18,Trun left 1,3,0,0.0
+19,Trun left 1,4,17,22.67
+20,Two-stage left turn 1,0,54,54.55
+21,Two-stage left turn 1,1,3,3.03
+22,Two-stage left turn 1,2,3,3.03
+23,Two-stage left turn 1,3,38,38.38
+24,Two-stage left turn 1,4,1,1.01
+25,Idle 2,0,37,52.86
+26,Idle 2,1,11,15.71
+27,Idle 2,2,18,25.71
+28,Idle 2,3,0,0.0
+29,Idle 2,4,4,5.71
+30,Go straight 2,0,26,46.43
+31,Go straight 2,1,9,16.07
+32,Go straight 2,2,15,26.79
+33,Go straight 2,3,0,0.0
+34,Go straight 2,4,6,10.71
+35,Turn right 2,0,25,37.31
+36,Turn right 2,1,7,10.45
+37,Turn right 2,2,21,31.34
+38,Turn right 2,3,0,0.0
+39,Turn right 2,4,14,20.9
+40,Turn left 2,0,16,20.51
+41,Turn left 2,1,6,7.69
+42,Turn left 2,2,29,37.18
+43,Turn left 2,3,0,0.0
+44,Turn left 2,4,27,34.62
+45,Two-stage left turn 2,0,51,58.62
+46,Two-stage left turn 2,1,4,4.6
+47,Two-stage left turn 2,2,1,1.15
+48,Two-stage left turn 2,3,30,34.48
+49,Two-stage left turn 2,4,1,1.15
+50,U-trun 1,0,4,5.63
+51,U-trun 1,1,5,7.04
+52,U-trun 1,2,6,8.45
+53,U-trun 1,3,52,73.24
+54,U-trun 1,4,4,5.63
+55,U-turn 2,0,3,3.7
+56,U-turn 2,1,7,8.64
+57,U-turn 2,2,10,12.35
+58,U-turn 2,3,59,72.84
+59,U-turn 2,4,2,2.47
