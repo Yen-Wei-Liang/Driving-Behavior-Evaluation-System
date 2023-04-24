@@ -244,7 +244,14 @@ Case_3.csv: Normalization + PCA (4 elements) + Kmean (divided into 5 groups)
 
 
 
+## Data Normalization Visualize
 
+### Left or Right
+![](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/blob/main/Discuss/20230423/Normalization%20+%20Z%E8%A7%92%E9%80%9F%E5%BA%A6_%E5%88%A4%E6%96%B7%E8%A1%8C%E7%82%BA.png?raw=true)
+
+
+### Driving Behavior
+![](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/blob/main/Discuss/20230423/Normalization%20+%20Z%E8%A7%92%E9%80%9F%E5%BA%A6_%E5%88%A4%E6%96%B7%E8%A1%8C%E7%82%BA.png?raw=true)
 
 
 
