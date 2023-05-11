@@ -36,30 +36,55 @@
       * [（5）左轉與待轉 （相似）](#3-動作元素3群-5)  
       * [（6）怠速與直行 （相似）](#3-動作元素3群-6)
 * [四、Prefix Tree](#4-PrefixTree-1)   
-  * [（一）依不同Acton建立分別的 Probabilistic Suffix Tree model （5 Action Element）](#4-PrefixTree-2) 
+  * [（一）依不同Acton建立分別的 Prefix Tree model （5 Action Element）](#4-PrefixTree-2) 
     * [（1）怠速](#4-PrefixTree-3) 
     * [（3）直線](#4-PrefixTree-4)  
     * [（4）左轉](#4-PrefixTree-5)  
     * [（5）右轉](#4-PrefixTree-6)  
     * [（6）待轉](#4-PrefixTree-7)   
     * [（7）迴轉](#4-PrefixTree-8) 
-  * [（二）依不同Acton建立分別的 Probabilistic Suffix Tree model （4 Action Element）](#4-PrefixTree-9) 
-    * [（1）怠速](#4-PrefixTree-10) 
-    * [（3）直線](#4-PrefixTree-11)  
-    * [（4）左轉](4-PrefixTree-12)  
-    * [（5）右轉](4-PrefixTree-13)  
-    * [（6）待轉](4-PrefixTree-14)   
-    * [（7）迴轉](4-PrefixTree-15)  
-  * [（三）依不同Acton建立分別的 Probabilistic Suffix Tree model （3 Action Element）](#4-PrefixTree-16) 
-    * [（1）怠速](#4-PrefixTree-17) 
-    * [（3）直線](#4-PrefixTree-18)  
-    * [（4）左轉](#4-PrefixTree-19)  
-    * [（5）右轉](#4-PrefixTree-20)  
-    * [（6）待轉](#4-PrefixTree-21)   
-    * [（7）迴轉](#4-PrefixTree-22)  
-
-
-* [五、本週PST功能測試](#test) 
+    * [模型預測](#4-PrefixTree-9) 
+  * [（二）依不同Acton建立分別的 Prefix Tree model （4 Action Element）](#4-PrefixTree-10) 
+    * [（1）怠速](#4-PrefixTree-11) 
+    * [（3）直線](#4-PrefixTree-12)  
+    * [（4）左轉](4-PrefixTree-13)  
+    * [（5）右轉](4-PrefixTree-14)  
+    * [（6）待轉](4-PrefixTree-15)   
+    * [（7）迴轉](4-PrefixTree-16)  
+    * [模型預測](#4-PrefixTree-17) 
+  * [（三）依不同Acton建立分別的 Prefix Tree model （3 Action Element）](#4-PrefixTree-18) 
+    * [（1）怠速](#4-PrefixTree-19) 
+    * [（3）直線](#4-PrefixTree-20)  
+    * [（4）左轉](#4-PrefixTree-21)  
+    * [（5）右轉](#4-PrefixTree-22)  
+    * [（6）待轉](#4-PrefixTree-23)   
+    * [（7）迴轉](#4-PrefixTree-24)  
+    * [模型預測](#4-PrefixTree-25) 
+* [五、Probabilistic Suffix Tree](#5-pst-1)   
+  * [（一）依不同Acton建立分別的 Probabilistic Suffix Tree model （5 Action Element）](#5-pst-2) 
+    * [（1）怠速](#5-pst-3) 
+    * [（3）直線](#5-pst-4)  
+    * [（4）左轉](#5-pst-5)  
+    * [（5）右轉](#5-pst-6)  
+    * [（6）待轉](#5-pst-7)   
+    * [（7）迴轉](#5-pst-8) 
+    * [模型預測](#5-pst-9) 
+  * [（二）依不同Acton建立分別的 Probabilistic Suffix Tree model （4 Action Element）](#5-pst-10) 
+    * [（1）怠速](#5-pst-11) 
+    * [（3）直線](#5-pst-12)  
+    * [（4）左轉](#5-pst-13)  
+    * [（5）右轉](#5-pst-14)  
+    * [（6）待轉](#5-pst-15)   
+    * [（7）迴轉](#5-pst-16) 
+    * [模型預測](#5-pst-17)
+  * [（三）依不同Acton建立分別的 Probabilistic Suffix Tree model （3 Action Element）](#5-pst-18) 
+    * [（1）怠速](#5-pst-19) 
+    * [（3）直線](#5-pst-20)  
+    * [（4）左轉](#5-pst-21)  
+    * [（5）右轉](#5-pst-22)  
+    * [（6）待轉](#5-pst-23)   
+    * [（7）迴轉](#5-pst-24) 
+    * [模型預測](#5-pst-25)   
 
  
  
@@ -417,69 +442,70 @@
 
 
 
-
-
-
-
 # 四、Prefix Tree <a name="4-PrefixTree-1"></a>
-## （一）依不同Acton建立分別的 Probabilistic Suffix Tree model （5 Action Element）<a name="4-PrefixTree-2"></a>
+## （一）依不同Acton建立分別的 Prefix Tree model （5 Action Element）<a name="4-PrefixTree-2"></a>
 
 ### 1.怠速 <a name="4-PrefixTree-3"></a> 
-#### 1400140040000010000400004100140000000044000140010000000014001400004000410400000000140014000004400010000100400041000141040
-![image](https://user-images.githubusercontent.com/127264553/235840977-bf92b9e5-ed52-4a57-9cdc-d921e549ed87.png)
+#### 
+![image](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/e3a0c080-f279-4b8f-88ff-3e6c34c591fa)
+
 
 ### 2.直線 <a name="4-PrefixTree-4"></a>
-#### 11211400201040021444444040241011214212114122121414101241404144
-![image](https://user-images.githubusercontent.com/127264553/235841292-da92e483-406b-4dd6-9a4e-fd0bb6435150.png)
+#### 
+![image](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/dee382e5-59b5-4d85-9422-f2d1f70e2f7b)
 
 ### 3.轉左 <a name="4-PrefixTree-5"></a>
-#### 141104114221411014244210004411401004444111444041014214402244011201210402024
-![image](https://user-images.githubusercontent.com/127264553/235841304-419c4f4d-35b0-473f-91b6-dd574839a81d.png)
+#### 
+![image](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/47b4e1f5-c742-4ebb-bfd0-a6e2f609f2e8)
 
 ### 4.右轉 <a name="4-PrefixTree-6"></a>
-#### 1404414411212110240400440402004401021100140111040101212104012411040400040
-![image](https://user-images.githubusercontent.com/127264553/235841324-f23f1045-ee41-4825-a67b-bded79aaba26.png)
+#### 
+![image](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/cc96cf99-5e55-4e89-ad31-4f585746a03d)
 
 ### 5.待轉 <a name="4-PrefixTree-7"></a>
-#### 424004142002400441202004110001000200100000000400010000110000100000033333333333333333333333333333333333333333304000001
-![image](https://user-images.githubusercontent.com/127264553/235841333-e6247f06-f998-45e0-9896-25e186f9df5a.png)
+#### 
+![image](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/83d64ace-d0d5-4a54-8a31-539dd0db6b3d)
 
 ### 6.迴轉 <a name="4-PrefixTree-8"></a>
-#### 3332323313313333333333333323333323333333333424341333211020420401444114
-
-![image](https://user-images.githubusercontent.com/127264553/235841344-9a91de0f-c543-4d06-a810-8f5d45c13bf2.png)
-
-
-### 模型預測（5 Action Element） <a name="4-PrefixTree-9000000000000000"></a>
+####
+![image](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/53a2bafe-82ad-4b56-827e-24abdeb00e2b)
 
 
+### 模型預測（5 Action Element） <a name="4-PrefixTree-9"></a>
+
+| Model \ Action | Go Straight | Idle | Turn Left | Turn Right | Two-Stage Left | U-turn |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| Go Straight Model | 0.0058 % | 0.00077 % | 0.0084 % | 0.002 % | 0.0032 % | 0.0032 % |
+| Idle Model | 0.0128 % | 0.31334 % | 0.0048 % | 0.018 % | 0.1309 % | 0.0001 % |
+| Turn Left Model | 0.026 % | 0.1314 % | 0.0181 % | 0.0144 % | 0.0285 % | 0.0031 % |
+| Turn Right Model | 0.0174 % | 0.04935 % | 0.0184 % | 0.0167 % | 0.0399 % | 0.0033 % |
+| Two-Stage Left Model | 0.0207 % | 0.00115 % | 0.0051 % | 0.0077 % | 0.0062 % | 0.006 % |
+| U-turn Model | 0.0203 % | 0.07834 % | 0.0197 % | 0.0164 % | 0.0215 % | 0.0034 % |
+
+## （二）依不同Acton建立分別的 Prefix Tree model （4 Action Element）<a name="4-PrefixTree-10"></a>
+
+## （三）依不同Acton建立分別的 Prefix Tree model （3 Action Element）<a name="4-PrefixTree-17"></a>
+
+
+# 五、Probabilistic Suffix Tree <a name="#5-pst-1"></a>
+d=90, alphabet_size=5
+## [（一）依不同Acton建立分別的 Probabilistic Suffix Tree model （5 Action Element）](#5-pst-2) 
+
+| Model\Action | Go Straight | Idle | Turn Left | Turn Right | Two-Stage Left | U-turn |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| Go Straight Model | -90.19 | -511.87|-120.64 | -120.87 |  155.39| -130.27|
+| Idle Model |-84.88 | -631.23|-156.77| -141.64| -307.47 | -371.02 |
+| Turn Left Model | -84.88 | -631.23| -156.77| -141.64 | -307.47 | -371.02 |
+| Turn Right Model | -84.88 | -631.23|-156.77| -141.64| -307.47 | -371.02 |
+| Two-Stage Left Model  -84.88 | -631.23|-156.77| -141.64| -307.47 | -371.02 |
+| U-turn Model  |-84.88 | -631.23|-156.77| -141.64| -307.47 | -371.02 |
+
+
+## [（二）依不同Acton建立分別的 Probabilistic Suffix Tree model （4 Action Element）](#5-pst-3) 
+## [（三）依不同Acton建立分別的 Probabilistic Suffix Tree model （3 Action Element）](#5-pst-4) 
 
 
 
-## （二）依不同Acton建立分別的 Probabilistic Suffix Tree model （4 Action Element）<a name="4-PrefixTree-9"></a>
 
-## （三）依不同Acton建立分別的 Probabilistic Suffix Tree model （3 Action Element）<a name="4-PrefixTree-16"></a>
-
-
-
-
-
-
-
-
-# 本週測試PST功能 <a name="test"></a>
-
-![image](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/1f78b6e3-c958-4599-8133-13e3b3d9b91c)
-![image](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/7c73e096-17a7-467c-bf08-3be0e4a3654f)
-
-![Screenshot from 2023-05-10 08-56-04](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/aebc3fb9-ed83-400a-a24a-382635e6bfd6)
-
-
-
-![Screenshot from 2023-05-10 13-57-35](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/a803b694-d9fb-4bdd-abac-c3d8a999467a)
-![Screenshot from 2023-05-10 13-58-12](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/09558a6c-a9ca-4e07-8e4e-364b5cde9d42)
-![Screenshot from 2023-05-10 13-58-20](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/c9ca70a5-3b18-4f23-9b34-1c3364a86c1c)
-![Screenshot from 2023-05-10 13-58-25](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/7035221a-10ae-4be3-b151-f731f5194fb3)
-![Screenshot from 2023-05-10 13-58-30](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/1a7abbc8-ba6a-4532-af24-3b5e858c639e)
 
 
