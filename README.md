@@ -62,29 +62,9 @@
     * [模型預測](#4-PrefixTree-25) 
 * [五、Probabilistic Suffix Tree](#5-pst-1)   
   * [（一）依不同Acton建立分別的 Probabilistic Suffix Tree model （5 Action Element）](#5-pst-2) 
-    * [（1）怠速](#5-pst-3) 
-    * [（3）直線](#5-pst-4)  
-    * [（4）左轉](#5-pst-5)  
-    * [（5）右轉](#5-pst-6)  
-    * [（6）待轉](#5-pst-7)   
-    * [（7）迴轉](#5-pst-8) 
-    * [模型預測](#5-pst-9) 
-  * [（二）依不同Acton建立分別的 Probabilistic Suffix Tree model （4 Action Element）](#5-pst-10) 
-    * [（1）怠速](#5-pst-11) 
-    * [（3）直線](#5-pst-12)  
-    * [（4）左轉](#5-pst-13)  
-    * [（5）右轉](#5-pst-14)  
-    * [（6）待轉](#5-pst-15)   
-    * [（7）迴轉](#5-pst-16) 
-    * [模型預測](#5-pst-17)
-  * [（三）依不同Acton建立分別的 Probabilistic Suffix Tree model （3 Action Element）](#5-pst-18) 
-    * [（1）怠速](#5-pst-19) 
-    * [（3）直線](#5-pst-20)  
-    * [（4）左轉](#5-pst-21)  
-    * [（5）右轉](#5-pst-22)  
-    * [（6）待轉](#5-pst-23)   
-    * [（7）迴轉](#5-pst-24) 
-    * [模型預測](#5-pst-25)   
+  * [（二）依不同Acton建立分別的 Probabilistic Suffix Tree model （4 Action Element）](#5-pst-3) 
+  * [（三）依不同Acton建立分別的 Probabilistic Suffix Tree model （3 Action Element）](#5-pst-4) 
+
 
  
  
@@ -107,19 +87,21 @@
 
 ## （一）最佳分群數 <a name="2-使用Sklearn上演算法驗證分群效果"></a>
 
-### 1.Silhouette Score <a name="2-SilhouetteScore"></a>
+### 1.Silhouette Score <a name="#2-silhouettescore"></a>
   The best value is 1 and the worst value is -1. Values near 0 indicate overlapping clusters. Negative values generally indicate that a sample has been assigned to the wrong cluster, as a different cluster is more similar.
 ![image](https://user-images.githubusercontent.com/127264553/235826819-4a162bec-3183-4fb6-8381-8890afefc241.png)
 
-### 2.Calinski-Harabasz Index <a name="2-CalinskiHarabaszIndex"></a>
+### 2.Calinski-Harabasz Index <a name="#2-calinskiharabaszIndex"></a>
   The score is higher when clusters are dense and well separated, which relates to a standard concept of a cluster.
 ![image](https://user-images.githubusercontent.com/127264553/235826833-6c1c3234-8d51-418c-827c-611fded8eae7.png)
-### 3.Davies-Bouldin Index <a name="2-DaviesBouldinIndex"></a>
+
+             
+### 3.Davies-Bouldin Index <a name="#2-daviesbouldinindex"></a>
   This index signifies the average ‘similarity’ between clusters, where the similarity is a measure that compares the distance between clusters with the size of the clusters themselves.
   Zero is the lowest possible score. Values closer to zero indicate a better partition.
   
 ![image](https://user-images.githubusercontent.com/127264553/235826844-2298b55e-b61b-4d90-9f60-c7b6af7fdd97.png)
-### 4.Elbow Method <a name="2-ElbowMethod"></a>
+### 4.Elbow Method <a name="#2-elbowmethod"></a>
 ![image](https://user-images.githubusercontent.com/127264553/235826864-ed077679-9f80-4766-a49f-9904e24aea21.png)
      
 # 三、動作觀察 <a name="3-動作觀察"></a>
@@ -253,7 +235,7 @@
 
  下圖X軸皆為 time step 、Y軸皆為： Value、九宮格分別對應9種特徵視覺化
 
-#### （1）左轉右轉比較 （不相似）<a name="16-動作元素4群-1"></a>
+#### （1）左轉右轉比較 （不相似）<a name="3-動作元素4群-1"></a>
 
 
 | Z軸角速度 | X軸角速度 | Y軸角速度 |
@@ -352,7 +334,7 @@
 
  下圖X軸皆為 time step 、Y軸皆為： Value、九宮格分別對應9種特徵視覺化
 
-#### （1）左轉右轉比較 （不相似）<a name="17-動作元素3群-1"></a>
+#### （1）左轉右轉比較 （不相似）<a name="3-動作元素3群-1"></a>
 
 
 | Z軸角速度 | X軸角速度 | Y軸角速度 |
@@ -484,12 +466,115 @@
 
 ## （二）依不同Acton建立分別的 Prefix Tree model （4 Action Element）<a name="4-PrefixTree-10"></a>
 
-## （三）依不同Acton建立分別的 Prefix Tree model （3 Action Element）<a name="4-PrefixTree-17"></a>
+
+
+### 1.怠速 <a name="4-PrefixTree-11"></a> 
+#### 
+
+![image](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/e94efc5b-5f68-43fc-b2f6-0f6f48d94a9f)
+
+
+### 2.直線 <a name="4-PrefixTree-12"></a>
+#### 
+![image](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/6f3f3a7f-e039-4fcf-81ab-4914ff1f1838)
+
+
+### 3.轉左 <a name="4-PrefixTree-13"></a>
+#### 
+![image](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/ff2d2f35-a209-411e-93e0-27cac9d64282)
+
+
+### 4.右轉 <a name="4-PrefixTree-14"></a>
+#### 
+![image](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/b5f971f1-71cd-4aac-9adf-7463c1f7584e)
+
+
+### 5.待轉 <a name="4-PrefixTree-15"></a>
+#### 
+![image](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/2d95c62c-ae3e-452b-9513-9573990e93d0)
+
+
+### 6.迴轉 <a name="4-PrefixTree-16"></a>
+####
+
+![image](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/78cfe25c-5912-4609-8aed-e57cc69295ab)
+
+
+### 模型預測（4 Action Element） <a name="4-PrefixTree-17"></a>
+
+| Model \ Action | Go Straight | Idle | Turn Left | Turn Right | Two-Stage Left | U-turn |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| Go Straight Model | 0.0238 % |0.0807 % | 0.0567 %|0.095 % | 0.0317 %|0.0713 % |
+| Idle Model | 0.00633 % | 0.09349 %| 0.09158 %| 0.11812 %| 0.00958 %| 0.18603 %|
+| Turn Left Model | 0.0167 % | 0.1705 %| 0.0815 %|0.0821 % | 0.0302 %| 0.0549 %|
+| Turn Right Model | 0.015 % | 0.1246 %| 0.0817 %|0.0904 % | 0.0246 %|0.0748 % |
+| Two-Stage Left Model| 0.0076 % | 0.0735 %| 0.0503 %| 0.0595 %| 0.022 %|0.0666 % |
+| U-turn Model |  0.0097 %|0.0002 % | 0.0155 %|0.0065 % |0.0064 % | 0.0063 %|
+
+
+
+
+
+
+
+
+
+
+
+
+## （三）依不同Acton建立分別的 Prefix Tree model （3 Action Element）<a name="4-PrefixTree-18"></a>
+
+
+### 1.怠速 <a name="4-PrefixTree-19"></a> 
+#### 
+
+![image](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/67f9162a-62df-4013-8ae9-1819dfe3d8b7)
+
+
+### 2.直線 <a name="4-PrefixTree-20"></a>
+#### 
+![image](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/bad7d75d-8a43-412b-9a40-20571efdd0c9)
+
+
+### 3.轉左 <a name="4-PrefixTree-21"></a>
+#### 
+![image](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/a03d2734-9486-41bb-ba43-bbd8d8e42329)
+
+
+### 4.右轉 <a name="4-PrefixTree-22"></a>
+#### 
+![image](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/bbc7f5b6-8266-4e4d-9367-4a41196bde86)
+
+
+### 5.待轉 <a name="4-PrefixTree-23"></a>
+#### 
+![image](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/85cb8029-d10a-4249-88b3-684b6fc9a67f)
+
+
+
+### 6.迴轉 <a name="4-PrefixTree-24"></a>
+####
+
+![image](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/ae3ce0d2-71f9-4a7a-8f1e-f5d30edbbaf6)
+
+
+
+### 模型預測（3 Action Element） <a name="4-PrefixTree-25"></a>
+
+| Model \ Action | Go Straight | Idle | Turn Left | Turn Right | Two-Stage Left | U-turn |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| Go Straight Model | 0.0238 % |0.0457 %| 0.057 %| 0.0897 %| 0.0324 %|0.0716 %|
+| Idle Model   |0.00622 %| 0.16509 %|0.0962 % |0.12087 % |0.00941 %|0.18948 %|
+| Turn Left Model  |0.0167 %| 0.0484 %|0.0841 %|0.0858 % |0.0302 %|0.0582 %|
+| Turn Right Model  |0.015 %| 0.0664 %| 0.0817 %| 0.0922 %|0.0246 %|0.0765 %|
+| Two-Stage Left Model  |0.0076 %| 0.0927 %| 0.0906 %| 0.1035 %|0.022 %|0.1078 %|
+| U-turn Model   |0.0227 %|0.0554 % |0.0677 % | 0.0798 %|0.0421 %| 0.0614 %|
+
 
 
 # 五、Probabilistic Suffix Tree <a name="#5-pst-1"></a>
 d=90, alphabet_size=5
-## [（一）依不同Acton建立分別的 Probabilistic Suffix Tree model （5 Action Element）](#5-pst-2) 
+## [（一）依不同Acton建立分別的 Probabilistic Suffix Tree model （5 Action Element）]<a name="#5-pst-2"></a>
 
 | Model\Action | Go Straight | Idle | Turn Left | Turn Right | Two-Stage Left | U-turn |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
@@ -497,15 +582,35 @@ d=90, alphabet_size=5
 | Idle Model |-84.88 | -631.23|-156.77| -141.64| -307.47 | -371.02 |
 | Turn Left Model | -84.88 | -631.23| -156.77| -141.64 | -307.47 | -371.02 |
 | Turn Right Model | -84.88 | -631.23|-156.77| -141.64| -307.47 | -371.02 |
-| Two-Stage Left Model  -84.88 | -631.23|-156.77| -141.64| -307.47 | -371.02 |
+| Two-Stage Left Model | -84.88 | -631.23|-156.77| -141.64| -307.47 | -371.02 |
 | U-turn Model  |-84.88 | -631.23|-156.77| -141.64| -307.47 | -371.02 |
 
 
-## [（二）依不同Acton建立分別的 Probabilistic Suffix Tree model （4 Action Element）](#5-pst-3) 
-## [（三）依不同Acton建立分別的 Probabilistic Suffix Tree model （3 Action Element）](#5-pst-4) 
+## [（二）依不同Acton建立分別的 Probabilistic Suffix Tree model （4 Action Element）]<a name="#5-pst-3"></a>
+
+
+| Model\Action | Go Straight | Idle | Turn Left | Turn Right | Two-Stage Left | U-turn |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| Go Straight Model | -72.25|  -469.78| -119.28 | -106.15 |-282.17 |-406.99|
+| Idle Model | -74.74|-410.82 |-109.43| -103.99 | -124.64 |-124.60 |
+| Turn Left Model | -69.59| 449.37|113.76 | 106.46 | -213.53 |-268.58 |
+| Turn Right Model | -72.39|-443.73 |-114.42 | -99.64 | -275.45 | -412.38|
+| Two-Stage Left Model | -82.78| -481.12| -120.81| -103.03 | -120.74 | -87.68|
+| U-turn Model  |-76.66 |-511.34 | -135.90| -119.69 | -155.03 | -101.65|
 
 
 
+## [（三）依不同Acton建立分別的 Probabilistic Suffix Tree model （3 Action Element）]<a name="#5-pst-4"></a>
 
+
+
+| Model\Action | Go Straight | Idle | Turn Left | Turn Right | Two-Stage Left | U-turn |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| Go Straight Model | -73.64  | -1842.07|-188.71 |-107.77|-160.50 |-131.73|
+| Idle Model|   | -74.00| -979.37|-109.57|-105.48|-132.35 |-112.80|
+| Turn Left Model | -69.30  | -1907.64| -122.93|-103.77|-154.81|-124.14 |
+| Turn Right Model |-72.39   | -1718.56|-114.17 |-100.37|-152.09|-124.02 |
+| Two-Stage Left Model | -80.58  | -2393.92|-150.26 |-132.62|-205.17| -153.95|
+| U-turn Model  | -88.51  | -2259.09| -142.53|-129.49|-178.3| -143.16|
 
 
