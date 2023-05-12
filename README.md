@@ -574,7 +574,7 @@
 
 # 五、Probabilistic Suffix Tree <a name="#5-pst-1"></a>
 d=90, alphabet_size=5
-## [（一）依不同Acton建立分別的 Probabilistic Suffix Tree model （5 Action Element）]<a name="#5-pst-2"></a>
+## （一）依不同Acton建立分別的 Probabilistic Suffix Tree model （5 Action Element）<a name="#5-pst-2"></a>
 
 | Model\Action | Go Straight | Idle | Turn Left | Turn Right | Two-Stage Left | U-turn |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
@@ -586,7 +586,7 @@ d=90, alphabet_size=5
 | U-turn Model  |-84.88 | -631.23|-156.77| -141.64| -307.47 | -371.02 |
 
 
-## [（二）依不同Acton建立分別的 Probabilistic Suffix Tree model （4 Action Element）]<a name="#5-pst-3"></a>
+## （二）依不同Acton建立分別的 Probabilistic Suffix Tree model （4 Action Element）<a name="#5-pst-3"></a>
 
 
 | Model\Action | Go Straight | Idle | Turn Left | Turn Right | Two-Stage Left | U-turn |
@@ -600,7 +600,7 @@ d=90, alphabet_size=5
 
 
 
-## [（三）依不同Acton建立分別的 Probabilistic Suffix Tree model （3 Action Element）]<a name="#5-pst-4"></a>
+## （三）依不同Acton建立分別的 Probabilistic Suffix Tree model （3 Action Element）<a name="#5-pst-4"></a>
 
 
 
