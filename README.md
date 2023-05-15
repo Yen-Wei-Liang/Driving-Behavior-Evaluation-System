@@ -573,6 +573,27 @@
 
 
 # 五、Probabilistic Suffix Tree <a name="#5-pst-1"></a>
+
+
+## 使用 Github
+https://github.com/rpgomez/vomm
+
+### 訓練三個模型分別為只有1,2 and 只有3,4 and 只有1,5
+![Screenshot from 2023-05-15 16-21-44](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/c4ba8cff-c1c0-4dc5-8a99-2fdbf619e055)
+
+### 設置 3個測試輸入 分別為只有 1,2 and 3,4  and 1,5
+
+![Screenshot from 2023-05-15 16-23-58](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/75e84fb5-bb83-42cd-aefc-7caa0257e928)
+
+
+### 預期：符合的資料機率教高, 只有1,2 與只有1,5一定比只有3,4的資料高
+
+![Screenshot from 2023-05-15 16-25-09](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/1f81acb5-f62e-45bb-aae5-7bd422e236b5)
+
+
+
+
+
 d=90, alphabet_size=5
 ## （一）依不同Acton建立分別的 Probabilistic Suffix Tree model （5 Action Element）<a name="#5-pst-2"></a>
 
