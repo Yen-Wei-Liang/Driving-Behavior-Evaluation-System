@@ -671,12 +671,33 @@ https://github.com/rpgomez/vomm
 | U-turn Model | -123.47 | -740.18| -195.66|-195.58|-223.13|-119.36|
 
 
+## （六）依不同Acton建立分別的 Probabilistic Suffix Tree model （8 Action Element）<a name="5-pst-8"></a>
+
+
+
+| Model\Action | Go Straight | Idle | Turn Left | Turn Right | Two-Stage Left | U-turn |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| Go Straight Model |-108.25 | -734.53 | -183.32| -161.73|-337.77|-373.83|
+| Idle Model|-127.70 | -566.25 | -160.54|-163.86 |-175.61|-176.35|
+| Turn Left Model | -110.50 |-800.48 |-194.97 |-172.27|-359.38|-384.22|
+| Turn Right Model |-112.60 | -733.01 | -189.17| -173.92|-332.37|-377.14|
+| Two-Stage Left Model |-119.31 |-651.26  | -172.49| -167.14|-168.18|-138.38|
+| U-turn Model | -122.93 | -814.98| -206.05 |-200.46 |-237.96 |-122.20|
 
 
 
 
+## （七）依不同Acton建立分別的 Probabilistic Suffix Tree model 統計<a name="5-pst-9"></a>
 
 
+
+| Model\Action | Go Straight | Idle | Turn Left | Turn Right | Two-Stage Left | U-turn |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| 3 Action Element | X | O | X| O|O|X|
+| 4 Action Element | X | O|X |X|O|X|
+| 5 Action Element | O |O |X |X|O|O|
+| 6 Action Element |X | O | X| X|X|O|
+| 7 Action Element |X |O  | X| X|O|O|
 
 
 
