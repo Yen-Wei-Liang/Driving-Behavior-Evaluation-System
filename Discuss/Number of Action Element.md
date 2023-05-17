@@ -1,4 +1,28 @@
+
+
+
 [模型訓練輸入值與測試輸入值參考](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/blob/main/Discuss/Chart/input.txt)
+
+
+### （*****）依Action Element數量為5建立的 Probabilistic Suffix Tree model<a name="5-pst-10"></a>
+
+| Model\Action | Go Straight | Idle | Turn Left | Turn Right | Two-Stage Left | U-turn |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| Go Straight Model | -15.50|-95.75| -28.14|-22.37| -42.94 |-48.48  | 
+| Idle Model|-13.71 |-80.81 |-22.24| -16.22 | -38.66 |-61.27 |
+| Turn Left Model | -12.27| -97.31|-24.13| -23.13 |-39.16  |-46.75 |
+| Turn Right Model |-12.27 | -97.31|-24.13| -23.13 | -39.16 |-46.75 |
+| Two-Stage Left Model |-15.69 | -99.91|-23.81| -25.28 | -27.58 | -23.80|
+| U-turn Model | -19.33| -125.78|-33.04| -25.37 | -36.12 |-20.83 |
+
+
+
+
+
+
+
+
+
 
 ### （一）依不同Action Element數量 model 成功預測紀錄<a name="5-pst-9"></a>
 
