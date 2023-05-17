@@ -652,4 +652,12 @@ d=5, alphabet_size=4
  #### 2.先撇除直行的動作外,右轉較成功的預測
  
  
- 
+  ### 本週其他進度：
+  
+  #### ![tensorflow官網說明資料] (https://www.tensorflow.org/text/tutorials/transformer)
+  #### KerasModel.fit訓練需要(inputs, labels)成對。是inputs標記化的葡萄牙語和英語序列對
+  
+![Screenshot from 2023-05-16 18-02-11](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/b1b35fa3-15b2-4229-a9be-3d2e67b144f6)
+
+![image](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/2cbe9a20-8a0b-46ab-90e5-820721087e2f)
+
