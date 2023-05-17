@@ -594,25 +594,29 @@ https://github.com/rpgomez/vomm
 
 
 
-d=30, alphabet_size=4
-## （一）依不同Acton建立分別的 Probabilistic Suffix Tree model （5 Action Element）<a name="5-pst-2"></a>
+
+ 
+
+
+
+
+
+## （一）依不同Acton建立分別的 Probabilistic Suffix Tree model （3 Action Element）<a name="5-pst-3"></a>
+
+
 
 | Model\Action | Go Straight | Idle | Turn Left | Turn Right | Two-Stage Left | U-turn |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| Go Straight Model |-84.87 |-631.23 |-156.77 | -141.64 | -307.47 |-371.02 |
-| Idle Model |-90.19 |-511.87 |-120.63 | -120.87 | -155.38 | -130.26|
-| Turn Left Model | -87.09| -593.48| -154.95| -129.28 |-314.68  |-372.49 |
-| Turn Right Model | -93.23|-594.41 |-148.46 | -124.96 | -312.54 | -371.83|
-| Two-Stage Left Model | -86.15| -555.75| -124.14| -114.91 |-149.07  |-130.09 |
-| U-turn Model | -96.00| -625.50| -168.38| -127.63 |-195.94  | -118.97|
+| Go Straight Model | -62.74| -133.77 |-106.10 | -92.16 |-137.98 |-109.52|
+| Idle Model |-66.97 | -75.77 | -100.55| -89.29 |-124.76 |-94.52|
+| Turn Left Model | -59.11| -130.01 |-99.65 | -78.78 |-129.81 |-103.75|
+| Turn Right Model |-64.05 | -132.22 |-94.48 | -82.40 |-130.12 |-104.26|
+| Two-Stage Left Model |-59.50 | -122.29 |-98.05 | -79.30 |-121.22 |-107.94|
+| U-turn Model |-57.84 | -133.95 | -97.32| -90.83 |-123.65 |-104.29|
 
- ### 觀察得知如下：
- #### 1.不論使用什麼模型預測直行的機率都是最高的
- #### 2.先撇除直行的動作外,右轉及迴轉都是較成功的預測 
- 
 
-d=30, alphabet_size=3
-## （二）依不同Acton建立分別的 Probabilistic Suffix Tree model （4 Action Element）<a name="5-pst-3"></a>
+
+## （二）依不同Acton建立分別的 Probabilistic Suffix Tree model （4 Action Element）<a name="5-pst-4"></a>
 
 
 | Model\Action | Go Straight | Idle | Turn Left | Turn Right | Two-Stage Left | U-turn |
@@ -626,32 +630,59 @@ d=30, alphabet_size=3
 
 
 
- ### 觀察得知如下：
- #### 1.不論使用什麼模型預測直行的機率都是最高的
- #### 2.先撇除直行的動作外,右轉及迴轉都是較成功的預測
- #### 3.待轉雖然失敗但第高預測是迴轉 （大幅度左轉行為）
+
+## （三）依不同Acton建立分別的 Probabilistic Suffix Tree model （5 Action Element）<a name="5-pst-5"></a>
+
+| Model\Action | Go Straight | Idle | Turn Left | Turn Right | Two-Stage Left | U-turn |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| Go Straight Model |-84.87 |-631.23 |-156.77 | -141.64 | -307.47 |-371.02 |
+| Idle Model |-90.19 |-511.87 |-120.63 | -120.87 | -155.38 | -130.26|
+| Turn Left Model | -87.09| -593.48| -154.95| -129.28 |-314.68  |-372.49 |
+| Turn Right Model | -93.23|-594.41 |-148.46 | -124.96 | -312.54 | -371.83|
+| Two-Stage Left Model | -86.15| -555.75| -124.14| -114.91 |-149.07  |-130.09 |
+| U-turn Model | -96.00| -625.50| -168.38| -127.63 |-195.94  | -118.97|
 
 
-
-d=5, alphabet_size=4
-## （三）依不同Acton建立分別的 Probabilistic Suffix Tree model （3 Action Element）<a name="5-pst-4"></a>
+## （四）依不同Acton建立分別的 Probabilistic Suffix Tree model （6 Action Element）<a name="5-pst-6"></a>
 
 
 
 | Model\Action | Go Straight | Idle | Turn Left | Turn Right | Two-Stage Left | U-turn |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| Go Straight Model | -62.74| -133.77 |-106.10 | -92.16 |-137.98 |-109.52|
-| Idle Model |-66.97 | -75.77 | -100.55| -89.29 |-124.76 |-94.52|
-| Turn Left Model | -59.11| -130.01 |-99.65 | -78.78 |-129.81 |-103.75|
-| Turn Right Model |-64.05 | -132.22 |-94.48 | -82.40 |-130.12 |-104.26|
-| Two-Stage Left Model |-59.50 | -122.29 |-98.05 | -79.30 |-121.22 |-107.94|
-| U-turn Model |-57.84 | -133.95 | -97.32| -90.83 |-123.65 |-104.29|
+| Go Straight Model | -102.23| -636.02 |-165.63 |-150.30 |-323.41 |-366.17|
+| Idle Model| -112.14| -533.41 | -136.61| -141.45|-162.37 |-165.23|
+| Turn Left Model| -100.77| -695.52 | -176.30| -146.77|-336.25 |-373.58|
+| Turn Right Model |-105.28 |-680.83  |-152.45 |-150.00 |-318.50 |-367.04|
+| Two-Stage Left Model |-100.82 | -586.15 | -147.01| -141.74|-168.38 |-139.13|
+| U-turn Model| -100.04| -765.01 | -200.08| -166.23| -232.76|-121.90|
 
- ### 觀察得知如下：
- #### 1.不論使用什麼模型預測直行的機率都是最高的
- #### 2.先撇除直行的動作外,右轉較成功的預測
- 
- 
+
+## （五）依不同Acton建立分別的 Probabilistic Suffix Tree model （7 Action Element）<a name="5-pst-7"></a>
+
+
+
+| Model\Action | Go Straight | Idle | Turn Left | Turn Right | Two-Stage Left | U-turn |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| Go Straight Model |-105.45 | -737.68 |-176.86 | -161.66|-342.78|-384.07|
+| Idle Model|  -120.36 | -565.65| -151.93|-161.47|-176.26|-167.28|
+| Turn Left Model|-103.28 | -751.49 |-183.53 | -168.88|-343.32|-379.71|
+| Turn Right Model | -108.95| -741.25 | -196.71|-167.32 |-338.96|-383.35|
+| Two-Stage Left Model | -108.76| -645.94 | -161.05| -150.45|-160.30|-133.47|
+| U-turn Model | -123.47 | -740.18| -195.66|-195.58|-223.13|-119.36|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   ### 本週其他進度：
   
   #### ![tensorflow官網說明資料] (https://www.tensorflow.org/text/tutorials/transformer)
