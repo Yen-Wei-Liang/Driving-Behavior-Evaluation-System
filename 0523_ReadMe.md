@@ -8,7 +8,7 @@
   * [2.2 Calinski-Harabasz Index](#22-calinski-harabasz-index)
   * [2.3 Davies-Bouldin Index](#23-davies-bouldin-index)
   * [2.4 Elbow Method](#24-elbow-method)
-* [三、動作元素個數與VOMM建模預測](#3-動作元素個數與vomm建模預測)
+* [三、動作元素個數與VOMM建模預測](#3-動作元素個數與VOMM建模預測)
   * [3.1 輸入4段序列動作資料進行訓練](#31-輸入4段序列動作資料進行訓練)
     * [3.1.1 動作元素4群探討](#311-動作元素4群探討)
     * [3.1.2 動作元素8群探討](#312-動作元素8群探討)
@@ -38,26 +38,26 @@
 
 # 二、Semi-automatic labeling <a name="2-semi-automatic-labeling"></a>
 
-## 2.1 Silhouette Score <a name="#21-silhouette-score"></a>
+## 2.1 Silhouette Score <a name="21-silhouette-score"></a>
   **The best value is 1 and the worst value is -1. Values near 0 indicate overlapping clusters. Negative values generally indicate that a sample has been assigned to the wrong cluster, as a different cluster is more similar.**
 
 ![Silhouette score - 畫圈](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/afcc1f3e-f824-447e-9257-8e3919623fe3)
 
-## 2.2 Calinski-Harabasz Index <a name="#22-calinski-harabasz-index"></a>
+## 2.2 Calinski-Harabasz Index <a name="22-calinski-harabasz-index"></a>
   **The score is higher when clusters are dense and well separated, which relates to a standard concept of a cluster.**
 
 ![Calinski-Harabasz Index - 畫圈](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/29c08450-cc52-42c7-9642-2954df6d68bf)
 
 
              
-## 2.3 Davies-Bouldin Index <a name="#23-davies-bouldin-index"></a>
+## 2.3 Davies-Bouldin Index <a name="23-davies-bouldin-index"></a>
   **This index signifies the average ‘similarity’ between clusters, where the similarity is a measure that compares the distance between clusters with the size of the clusters themselves.
   Zero is the lowest possible score. Values closer to zero indicate a better partition.**
 
 ![Davies-Bouldin score - 畫圖](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/f4bfd34e-d380-4072-bed3-d1b9fc895c8c)
 
 
-## 2.4 Elbow Method <a name="#24-elbow-method"></a>
+## 2.4 Elbow Method <a name="24-elbow-method"></a>
 ![Elbow Method](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/14b6d796-273c-4fd6-8501-d99fd17661fc)
 
 
@@ -76,7 +76,7 @@
 ## 3.1 輸入4段序列動作資料進行訓練<a name="31-輸入4段序列動作資料進行訓練"></a>
 
 
-### 3.1.1 動作元素4群探討 <a name="311-動作元素4群"></a>
+### 3.1.1 動作元素4群探討 <a name="311-動作元素4群探討"></a>
 | Model\Action   |   Go Straight Model |   Idle Model |   Turn Left Model |   Turn Right Model |   Two-Stage Left Model |   U-turn Model |
 |:--------------:|:-------------------:|:------------:|:-----------------:|:------------------:|:----------------------:|:--------------:|
 | Go Straight    |    **-20.05**           |       -22.21 |            -28.76 |             -22.47 |                 -22.11 |         -29.45 |
@@ -85,7 +85,7 @@
 | Turn Right     |              -18.14 |       -17.98 |            -16.32 |            **-13.57** |                 -21.24 |         -18.31 |
 | Two-Stage Left |              -57.87 |       -49.5  |            -43.74 |             -50.73 |                 **-25.53** |         -30.67 |
 | U-turn         |              -57.72 |       -48.73 |            -43.8  |             -47.71 |                 -16.02 |         **-12.63** |
-### 3.1.2 動作元素8群探討 <a name="312-動作元素8群"></a>
+### 3.1.2 動作元素8群探討 <a name="312-動作元素8群探討"></a>
 | Model\Action   |   Go Straight Model |   Idle Model |   Turn Left Model |   Turn Right Model |   Two-Stage Left Model |   U-turn Model |
 |:--------------:|:-------------------:|:------------:|:-----------------:|:------------------:|:----------------------:|:--------------:|
 | Go Straight    |              **-23.63** |       -28.73 |            -30.61 |             -27.55 |                 -26.98 |         -26.02 |
@@ -94,7 +94,7 @@
 | Turn Right     |              -24.96 |       -19.25 |            **-17.92** |             -18.57 |                 -25.26 |         -19.27 |
 | Two-Stage Left |              -66.58 |       -63.92 |            -57.76 |             -58.03 |                 **-27.13** |         -63.06 |
 | U-turn         |              -37.29 |       -33.88 |            -29.78 |             -38.49 |                 -33.49 |         **-18.01** |
-### 3.1.3 動作元素10群探討 <a name="313-動作元素10群"></a>
+### 3.1.3 動作元素10群探討 <a name="313-動作元素10群探討"></a>
 | Model\Action   |   Go Straight Model |   Idle Model |   Turn Left Model |   Turn Right Model |   Two-Stage Left Model |   U-turn Model |
 |:--------------:|:-------------------:|:------------:|:-----------------:|:------------------:|:----------------------:|:--------------:|
 | Go Straight    |              **-33.97** |       -46    |            -38.95 |             -40.35 |                 -36.2  |         -49.81 |
@@ -109,7 +109,7 @@
 
 ## 3.2 輸入8段序列動作資料進行訓練<a name="32-輸入8段序列動作資料進行訓練"></a>
 
-### 3.2.1 動作元素4群探討 <a name="321-動作元素4群"></a>
+### 3.2.1 動作元素4群探討 <a name="321-動作元素4群探討"></a>
 | Model\Action   |   Go Straight Model |   Idle Model |   Turn Left Model |   Turn Right Model |   Two-Stage Left Model |   U-turn Model |
 |:--------------:|:-------------------:|:------------:|:-----------------:|:------------------:|:----------------------:|:--------------:|
 | Go Straight    |              -14.51 |       -13.26 |            -15.5  |             **-12.03** |                 -15.56 |         -15.55 |
@@ -118,7 +118,7 @@
 | Turn Right     |              -19.71 |       -21.94 |            -21.86 |             -21.22 |                 **-14.71** |         -20.98 |
 | Two-Stage Left |              -25.72 |       -47.97 |            -46.11 |             -46.65 |                 **-24.54** |         -27    |
 | U-turn         |              -28.33 |       -56.16 |            -51.74 |             -56.22 |                 -19.85 |         **-17.98** |
-### 3.2.2 動作元素8群探討 <a name="322-動作元素8群"></a>
+### 3.2.2 動作元素8群探討 <a name="322-動作元素8群探討"></a>
 | Model\Action   |   Go Straight Model |   Idle Model |   Turn Left Model |   Turn Right Model |   Two-Stage Left Model |   U-turn Model |
 |:--------------:|:-------------------:|:------------:|:-----------------:|:------------------:|:----------------------:|:--------------:|
 | Go Straight    |              -23.39 |       **-18.39** |            -23.09 |             -23.58 |                 -22.35 |         -21.97 |
@@ -127,7 +127,7 @@
 | Turn Right     |              -38.55 |       -33.63 |            -35.23 |             **-30.15** |                 -42.85 |         -41.29 |
 | Two-Stage Left |              -44.91 |       -63.12 |            -64.84 |             -62.83 |                 **-32.23** |         -37.15 |
 | U-turn         |              -36.54 |       -62.09 |            -64.86 |             -65.15 |                 **-21.79** |         -24.41 |
-### 3.2.3 動作元素10群探討 <a name="323-動作元素10群"></a>
+### 3.2.3 動作元素10群探討 <a name="323-動作元素10群探討"></a>
 | Model\Action   |   Go Straight Model |   Idle Model |   Turn Left Model |   Turn Right Model |   Two-Stage Left Model |   U-turn Model |
 |:--------------:|:-------------------:|:------------:|:-----------------:|:------------------:|:----------------------:|:--------------:|
 | Go Straight    |              -27.75 |       **-18.7**  |            -22.16 |             -21.21 |                 -28.46 |         -26.66 |
