@@ -19,8 +19,20 @@
     * [4.2.1 左轉vs迴轉](#4.2.1-左轉vs迴轉)
     * [4.2.2 左轉vs待轉](#4.2.2-左轉vs待轉)
     * [4.2.3 直線vs怠速](#4.2.3-直線vs怠速)
-
-
+* [五、動作元素個數與VOMM建模預測](#5-動作元素個數與VOMM建模預測)
+  * [5.1 輸入4段序列動作資料進行訓練](#5.1-輸入4段序列動作資料進行訓練)
+    * [5.1.1 動作元素4群探討](#5.1.1-動作元素4群探討)
+    * [5.1.2 動作元素8群探討](#5.1.2-動作元素8群探討)
+    * [5.1.3 動作元素10群探討](#5.1.3-動作元素10群探討)
+  * [5.2 訓練輸入該動作8段序列資料](#5.2-訓練輸入該動作8段序列資料)
+    * [5.2.1 動作元素4群探討](#5.2.1-動作元素4群探討)
+    * [5.2.2 動作元素8群探討](#5.2.2-動作元素8群探討)
+    * [5.2.3 動作元素10群探討](#5.2.3-動作元素10群探討)
+  * [5.3 預測序列資料](#5.3-預測序列資料)
+    * [5.3.1 動作元素4群預測](#5.3.1-動作元素4群預測)
+    * [5.3.2 自動標記預測](#5.3.2-自動標記預測)
+      * [5.3.2.1 觀察序列(怠速-待轉-怠速(無轉換時間))](#5.3.2.1-觀察序列(怠速-待轉-怠速(無轉換時間)))
+      * [5.3.2.3 觀察序列(迴轉-左轉-怠速(轉換時間))](#5.3.2.2-觀察序列(迴轉-左轉-怠速(轉換時間)))
 
 
 
@@ -160,4 +172,280 @@
 |![X-axis Acceleration Go straight vs Idle（best）](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/9e1eb967-ab40-4e1e-9823-07b9a64d93e5)|![Y-axis Acceleration Go straight vs Idle（best）](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/c9891fe2-6b32-458e-8305-464c486ad3ea)|![Z-axis Acceleration Go straight vs Idle（best）](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/d0db754b-cdcd-4c51-81be-a1d16b5a064b)|
 | X角度 | Y角度| Z角度 |
 |![X-axis Angle Go straight vs Idle（best）](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/2ea3dbc2-149b-4a78-8446-776af70effcb)|![Y-axis Angle Go straight vs Idle（best）](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/4e984626-4db8-4205-8d90-9cdb94fc7b41)|![Z-axis Angle Go straight vs Idle（best）](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/afc750c5-09fa-4ea1-a8cd-e15f0403d461)|
- 
+
+
+
+
+# 五、動作元素個數與VOMM建模預測 <a name="5-動作元素個數與VOMM建模預測"></a> 
+
+**參考演算法 - VOMM (Variable Order Markov Models)** <br>
+**該演算法的實現參考了[rpgomez/vomm](https://github.com/rpgomez/vomm)項目。** <br>
+**感謝[rpgomez](https://github.com/rpgomez)的貢獻和開源精神！可拜訪該項目的GitHub頁面以獲取更多關於VOMM算法的詳細信息和代碼實現。** <br>
+
+[訓練輸入與測試輸入請參考 VOMM_Input.txt]()
+
+
+## 5.1 輸入4段序列動作資料進行訓練<a name="5.1-輸入4段序列動作資料進行訓練"></a>
+
+
+### 5.1.1 動作元素4群探討 <a name="5.1.1-動作元素4群探討"></a>
+| Model\Action   |   Go Straight Model |   Idle Model |   Turn Left Model |   Turn Right Model |   Two-Stage Left Model |   U-turn Model |
+|:--------------:|:-------------------:|:------------:|:-----------------:|:------------------:|:----------------------:|:--------------:|
+| Go Straight    |    **-20.05**           |       -22.21 |            -28.76 |             -22.47 |                 -22.11 |         -29.45 |
+| Idle           |              -92.73 |     **-88.52**   |           -105.47 |             -92.05 |                -104    |        -114.46 |
+| Turn Left      |              -17.32 |       -17.9  |            **-15.32** |             -18.98 |                 -23.41 |         -24.25 |
+| Turn Right     |              -18.14 |       -17.98 |            -16.32 |            **-13.57** |                 -21.24 |         -18.31 |
+| Two-Stage Left |              -57.87 |       -49.5  |            -43.74 |             -50.73 |                 **-25.53** |         -30.67 |
+| U-turn         |              -57.72 |       -48.73 |            -43.8  |             -47.71 |                 -16.02 |         **-12.63** |
+### 5.1.2 動作元素8群探討 <a name="5.1.2-動作元素8群探討"></a>
+| Model\Action   |   Go Straight Model |   Idle Model |   Turn Left Model |   Turn Right Model |   Two-Stage Left Model |   U-turn Model |
+|:--------------:|:-------------------:|:------------:|:-----------------:|:------------------:|:----------------------:|:--------------:|
+| Go Straight    |              **-23.63** |       -28.73 |            -30.61 |             -27.55 |                 -26.98 |         -26.02 |
+| Idle           |             -100.9  |      -166.86 |           -119.82 |            -119.71 |                **-97.71** |        -133.69 |
+| Turn Left      |              -26.94 |       -28.43 |            -26.13 |             -27.88 |                 -30.17 |         **-25.32** |
+| Turn Right     |              -24.96 |       -19.25 |            **-17.92** |             -18.57 |                 -25.26 |         -19.27 |
+| Two-Stage Left |              -66.58 |       -63.92 |            -57.76 |             -58.03 |                 **-27.13** |         -63.06 |
+| U-turn         |              -37.29 |       -33.88 |            -29.78 |             -38.49 |                 -33.49 |         **-18.01** |
+### 5.1.3 動作元素10群探討 <a name="5.1.3-動作元素10群探討"></a>
+| Model\Action   |   Go Straight Model |   Idle Model |   Turn Left Model |   Turn Right Model |   Two-Stage Left Model |   U-turn Model |
+|:--------------:|:-------------------:|:------------:|:-----------------:|:------------------:|:----------------------:|:--------------:|
+| Go Straight    |              **-33.97** |       -46    |            -38.95 |             -40.35 |                 -36.2  |         -49.81 |
+| Idle           |             **-134.29** |      -177.38 |           -197.77 |            -203.78 |                -160.65 |        -212.08 |
+| Turn Left      |              -43.15 |       **-34.11** |            -36.16 |             -38.73 |                 -44.93 |         -40.56 |
+| Turn Right     |              -36.12 |       -33.1  |            **-32.1**  |             -32.62 |                 -38.47 |         -39.41 |
+| Two-Stage Left |              -76.11 |       -68.34 |            -73.21 |             -73.05 |                 **-41.88** |         -46.66 |
+| U-turn         |              -73.71 |       -60.91 |            -63.99 |             -64.36 |                 **-22.69** |         -24.47 |
+
+
+
+
+## 5.2 輸入8段序列動作資料進行訓練<a name="5.2-訓練輸入該動作8段序列資料"></a>
+
+### 5.2.1 動作元素4群探討 <a name="5.2.1-動作元素4群探討"></a>
+| Model\Action   |   Go Straight Model |   Idle Model |   Turn Left Model |   Turn Right Model |   Two-Stage Left Model |   U-turn Model |
+|:--------------:|:-------------------:|:------------:|:-----------------:|:------------------:|:----------------------:|:--------------:|
+| Go Straight    |              -14.51 |       -13.26 |            -15.5  |             **-12.03** |                 -15.56 |         -15.55 |
+| Idle           |              **-83**    |       -91.08 |            -93.24 |             -89.12 |                 -95.15 |        -103.21 |
+| Turn Left      |              -19.54 |       -21.81 |            **-19.52** |             -19.85 |                 -27.4  |         -23.19 |
+| Turn Right     |              -19.71 |       -21.94 |            -21.86 |             -21.22 |                 **-14.71** |         -20.98 |
+| Two-Stage Left |              -25.72 |       -47.97 |            -46.11 |             -46.65 |                 **-24.54** |         -27    |
+| U-turn         |              -28.33 |       -56.16 |            -51.74 |             -56.22 |                 -19.85 |         **-17.98** |
+### 5.2.2 動作元素8群探討 <a name="5.2.2-動作元素8群探討"></a>
+| Model\Action   |   Go Straight Model |   Idle Model |   Turn Left Model |   Turn Right Model |   Two-Stage Left Model |   U-turn Model |
+|:--------------:|:-------------------:|:------------:|:-----------------:|:------------------:|:----------------------:|:--------------:|
+| Go Straight    |              -23.39 |       **-18.39** |            -23.09 |             -23.58 |                 -22.35 |         -21.97 |
+| Idle           |             **-103.33** |      -190.84 |           -173.43 |            -164.64 |                -132.97 |        -169.27 |
+| Turn Left      |              -34.65 |       -35.91 |            -36.28 |             **-32.5**  |                 -35.6  |         -48.4  |
+| Turn Right     |              -38.55 |       -33.63 |            -35.23 |             **-30.15** |                 -42.85 |         -41.29 |
+| Two-Stage Left |              -44.91 |       -63.12 |            -64.84 |             -62.83 |                 **-32.23** |         -37.15 |
+| U-turn         |              -36.54 |       -62.09 |            -64.86 |             -65.15 |                 **-21.79** |         -24.41 |
+### 5.2.3 動作元素10群探討 <a name="5.2.3-動作元素10群探討"></a>
+| Model\Action   |   Go Straight Model |   Idle Model |   Turn Left Model |   Turn Right Model |   Two-Stage Left Model |   U-turn Model |
+|:--------------:|:-------------------:|:------------:|:-----------------:|:------------------:|:----------------------:|:--------------:|
+| Go Straight    |              -27.75 |       **-18.7**  |            -22.16 |             -21.21 |                 -28.46 |         -26.66 |
+| Idle           |             **-124.19** |      -183.94 |           -231.74 |            -195.43 |                -158.03 |        -206.77 |
+| Turn Left      |              -43.3  |       -37.53 |            -43.38 |             -42.51 |                 **-36.51** |         -58.97 |
+| Turn Right     |              -42.21 |       -41.3  |            **-39.77** |             -40.74 |                 -42.95 |         -45.34 |
+| Two-Stage Left |              -53.77 |       -62.82 |            -76.38 |             -68.61 |                 -46.76 |         **-46.35** |
+| U-turn         |              -39.83 |       -64.48 |            -65.9  |             -65.79 |                 **-20.94** |         -24.47 |
+
+
+
+
+## 5.3 預測序列資料 <a name="5.3-預測序列資料"></a>
+
+### 5.3.1 動作元素4群預測 <a name="5.3.1-動作元素4群預測"></a>
+
+| Label \Time step   |   6 |   12 |   18 |   24 |   30 | 
+|:--------------:|:-------------------:|:------------:|:-----------------:|:------------------:|:------------------:|
+| Go Straight    |       21 %        |  **34 %**   |      32 %      |     23 %        |18 %|
+| Idle           |       **45 %**       |  37 %    |      33 %      |     30 %        | 28 %|
+| Turn Left      |       36 %       |  **40 %**     |      26 %       |       25 %       |28 %|
+| Turn Right     |       52 %       |   72 %      |    70 %        |     78 %         |**82 %**|
+| Two-Stage Left |      36 %        |   **44%**     |     39%        |      38 %        |37 %|
+| U-turn         |     **54 %**         |   32 %     |     29 %         |     22 %         |  20 % |
+
+
+
+      
+### 5.3.2 自動標記預測 <a name="5.3.2-自動標記預測"></a>
+
+
+
+#### 5.3.2.1 觀察序列(怠速-待轉-怠速(無轉換時間)) <a name="5.3.2.1-觀察序列(怠速-待轉-怠速(無轉換時間))"></a>
+
+
+| Action         | Predict 6      | Predict 12     | Predict 18     | Predict 24     | Predict 30     |
+|:---------------|:---------------|:---------------|:---------------|:---------------|:---------------|
+| Idle           | Turn Left      | Idle           | Idle           | Idle           | Idle           |
+| Idle           | Turn Right     | Idle           | Two-Stage Left | Idle           | Idle           |
+| Idle           | Turn Right     | Idle           | Idle           | Idle           | Idle           |
+| Idle           | Turn Right     | Idle           | Idle           | Idle           | Idle           |
+| Idle           | Turn Right     | Idle           | Idle           | Idle           | Idle           |
+| Idle           | Turn Right     | Idle           | Idle           | Idle           | Idle           |
+| Idle           | Idle           | Idle           | Idle           | Idle           | Idle           |
+| Idle           | Turn Right     | Turn Right     | Idle           | Idle           | Idle           |
+| Idle           | Idle           | Idle           | Idle           | Idle           | Idle           |
+| Idle           | Turn Left      | Idle           | Idle           | Idle           | Idle           |
+| Idle           | Turn Left      | Turn Right     | Idle           | Idle           | Turn Left      |
+| Idle           | Turn Left      | U-turn         | Idle           | Idle           | Idle           |
+| Idle           | Turn Left      | Turn Left      | Idle           | Idle           | Idle           |
+| Idle           | Turn Left      | Turn Left      | Idle           | Idle           | Idle           |
+| Idle           | Turn Left      | Idle           | Idle           | Idle           | Idle           |
+| Idle           | Idle           | Idle           | Idle           | Idle           | Idle           |
+| Idle           | Turn Left      | Idle           | Idle           | Idle           | Idle           |
+| Idle           | Two-Stage Left | Idle           | Turn Left      | Idle           | Idle           |
+| Idle           | Two-Stage Left | Idle           | Idle           | Idle           | Idle           |
+| Idle           | Turn Right     | Turn Left      | Turn Left      | Idle           | Idle           |
+| Idle           | Idle           | Turn Left      | Idle           | Idle           | Idle           |
+| Idle           | Turn Right     | Turn Left      | Turn Left      | Turn Left      | Idle           |
+| Two-Stage Left | Turn Right     | Turn Left      | Turn Left      | Turn Left      | Turn Left      |
+| Two-Stage Left | Turn Right     | Turn Left      | Turn Left      | Turn Left      | Turn Left      |
+| Two-Stage Left | Two-Stage Left | Two-Stage Left | Turn Left      | Turn Left      | Turn Left      |
+| Two-Stage Left | Turn Left      | Turn Right     | Turn Left      | Turn Left      | Turn Left      |
+| Two-Stage Left | Turn Right     | Turn Left      | Turn Left      | Turn Left      | Turn Left      |
+| Two-Stage Left | Turn Left      | Turn Left      | Turn Left      | Turn Left      | Turn Left      |
+| Two-Stage Left | Two-Stage Left | Turn Left      | Turn Left      | Two-Stage Left | U-turn         |
+| Two-Stage Left | Turn Left      | Turn Left      | Turn Left      | Turn Left      | Turn Left      |
+| Two-Stage Left | Two-Stage Left | Turn Left      | Turn Left      | Turn Left      | Turn Left      |
+| Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left | Turn Left      | Turn Left      |
+| Two-Stage Left | Go Straight    | Two-Stage Left | Turn Left      | Turn Left      | Turn Left      |
+| Two-Stage Left | Go Straight    | Turn Left      | Turn Left      | Turn Left      | Two-Stage Left |
+| Two-Stage Left | Go Straight    | Two-Stage Left | Two-Stage Left | Turn Left      | Two-Stage Left |
+| Two-Stage Left | Turn Right     | Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left |
+| Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left |
+| Two-Stage Left | Turn Right     | Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left |
+| Two-Stage Left | Idle           | Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left |
+| Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left |
+| Two-Stage Left | Two-Stage Left | U-turn         | Two-Stage Left | Two-Stage Left | Two-Stage Left |
+| Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left |
+| Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left |
+| Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left |
+| Idle           | Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left |
+| Idle           | Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left |
+| Idle           | Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left |
+| Idle           | Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left |
+| Idle           | Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left |
+| Idle           | Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left |
+| Idle           | Turn Left      | Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left |
+| Idle           | Go Straight    | Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left |
+| Idle           | Turn Right     | Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left |
+| Idle           | Turn Right     | Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left |
+| Idle           | Turn Right     | Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left |
+| Idle           | Turn Right     | Two-Stage Left | Two-Stage Left | Two-Stage Left | Two-Stage Left |
+| Idle           | Idle           | Turn Right     | Two-Stage Left | Two-Stage Left | Two-Stage Left |
+| Idle           | Idle           | Turn Right     | Two-Stage Left | Two-Stage Left | Two-Stage Left |
+| Idle           | Idle           | Turn Right     | Two-Stage Left | Two-Stage Left | Two-Stage Left |
+| Idle           | Idle           | Turn Right     | Two-Stage Left | Two-Stage Left | Two-Stage Left |
+| Idle           | Idle           | Turn Right     | Two-Stage Left | Two-Stage Left | Two-Stage Left |
+| Idle           | Idle           | Go Straight    | Two-Stage Left | Two-Stage Left | Two-Stage Left |
+| Idle           | Idle           | Idle           | Go Straight    | Two-Stage Left | Two-Stage Left |
+| Idle           | Idle           | Turn Left      | Turn Right     | Two-Stage Left | Two-Stage Left |
+| Idle           | Idle           | Turn Left      | Turn Right     | Two-Stage Left | Two-Stage Left |
+| Idle           | Turn Right     | Turn Left      | Turn Right     | U-turn         | Two-Stage Left |
+
+
+#### 5.3.2.3 觀察序列(迴轉-左轉-怠速(轉換時間)) <a name="5.3.2.2-觀察序列(迴轉-左轉-怠速(轉換時間))"></a>
+
+| Action    | Predict 6      | Predict 12     | Predict 18     | Predict 24     | Predict 30     |
+|:----------|:---------------|:---------------|:---------------|:---------------|:---------------|
+| Idle      | Two-Stage Left | U-turn         | Turn Left      | Turn Left      | Turn Right     |
+| U-turn    | Two-Stage Left | Two-Stage Left | U-turn         | Turn Left      | Turn Right     |
+| U-turn    | Two-Stage Left | Two-Stage Left | U-turn         | U-turn         | Turn Right     |
+| U-turn    | Two-Stage Left | Two-Stage Left | U-turn         | U-turn         | U-turn         |
+| U-turn    | U-turn         | Two-Stage Left | U-turn         | U-turn         | U-turn         |
+| U-turn    | U-turn         | U-turn         | U-turn         | U-turn         | U-turn         |
+| U-turn    | U-turn         | U-turn         | U-turn         | U-turn         | U-turn         |
+| U-turn    | U-turn         | U-turn         | U-turn         | U-turn         | U-turn         |
+| U-turn    | U-turn         | U-turn         | U-turn         | U-turn         | U-turn         |
+| U-turn    | U-turn         | U-turn         | U-turn         | U-turn         | U-turn         |
+| U-turn    | U-turn         | U-turn         | U-turn         | U-turn         | U-turn         |
+| U-turn    | U-turn         | U-turn         | U-turn         | U-turn         | U-turn         |
+| U-turn    | Two-Stage Left | U-turn         | U-turn         | U-turn         | U-turn         |
+| U-turn    | U-turn         | U-turn         | U-turn         | U-turn         | U-turn         |
+| U-turn    | U-turn         | U-turn         | U-turn         | U-turn         | U-turn         |
+| U-turn    | U-turn         | U-turn         | U-turn         | U-turn         | U-turn         |
+| U-turn    | U-turn         | U-turn         | U-turn         | U-turn         | U-turn         |
+| nan       | U-turn         | U-turn         | U-turn         | U-turn         | U-turn         |
+| nan       | Turn Left      | U-turn         | U-turn         | U-turn         | U-turn         |
+| nan       | Two-Stage Left | U-turn         | U-turn         | U-turn         | U-turn         |
+| nan       | Turn Left      | U-turn         | U-turn         | U-turn         | U-turn         |
+| nan       | Two-Stage Left | U-turn         | U-turn         | U-turn         | U-turn         |
+| nan       | Turn Left      | Two-Stage Left | U-turn         | U-turn         | U-turn         |
+| nan       | Turn Left      | Two-Stage Left | U-turn         | U-turn         | U-turn         |
+| nan       | Turn Right     | Turn Left      | U-turn         | U-turn         | U-turn         |
+| nan       | Turn Right     | Two-Stage Left | U-turn         | U-turn         | U-turn         |
+| nan       | Turn Right     | Two-Stage Left | Two-Stage Left | U-turn         | U-turn         |
+| nan       | Turn Right     | Two-Stage Left | Two-Stage Left | U-turn         | U-turn         |
+| nan       | Turn Right     | Turn Right     | Two-Stage Left | U-turn         | U-turn         |
+| nan       | Turn Right     | Turn Right     | Two-Stage Left | U-turn         | U-turn         |
+| nan       | Turn Right     | Turn Right     | Turn Right     | U-turn         | U-turn         |
+| nan       | Turn Right     | Turn Right     | Turn Right     | Two-Stage Left | U-turn         |
+| nan       | U-turn         | Turn Right     | Turn Right     | Two-Stage Left | U-turn         |
+| nan       | U-turn         | Turn Right     | Turn Right     | Two-Stage Left | U-turn         |
+| nan       | Turn Right     | Turn Right     | Turn Right     | Two-Stage Left | U-turn         |
+| nan       | Idle           | Turn Right     | Turn Right     | Turn Right     | U-turn         |
+| nan       | Idle           | Turn Right     | Turn Right     | Turn Right     | U-turn         |
+| nan       | Go Straight    | Turn Right     | Turn Right     | Turn Right     | Two-Stage Left |
+| nan       | Turn Right     | Turn Right     | Turn Right     | Turn Right     | Two-Stage Left |
+| nan       | Turn Right     | Turn Right     | Turn Right     | Turn Right     | Two-Stage Left |
+| nan       | Turn Right     | Turn Right     | Turn Right     | Turn Right     | Two-Stage Left |
+| nan       | Turn Right     | Idle           | Turn Right     | Turn Right     | Turn Right     |
+| nan       | Turn Left      | Idle           | Turn Right     | Turn Right     | Turn Right     |
+| nan       | Idle           | Idle           | Turn Right     | Turn Right     | Turn Right     |
+| Turn Left | Idle           | Idle           | Turn Right     | Turn Right     | Turn Right     |
+| Turn Left | Go Straight    | Idle           | Turn Right     | Turn Right     | Turn Right     |
+| Turn Left | Turn Left      | Idle           | Turn Right     | Turn Right     | Turn Right     |
+| Turn Left | Go Straight    | Turn Left      | Idle           | Turn Right     | Turn Right     |
+| Turn Left | U-turn         | Turn Left      | Idle           | Turn Right     | Turn Right     |
+| Turn Left | Turn Right     | Turn Left      | Idle           | Turn Right     | Turn Right     |
+| Turn Left | Two-Stage Left | Turn Left      | Idle           | Turn Right     | Turn Right     |
+| Turn Left | Idle           | Go Straight    | Idle           | Turn Right     | Turn Right     |
+| Turn Left | Two-Stage Left | Turn Left      | Turn Right     | Turn Right     | Turn Right     |
+| Turn Left | Turn Left      | Turn Left      | Turn Left      | Turn Right     | Turn Right     |
+| Turn Left | Turn Left      | Two-Stage Left | Turn Left      | Idle           | Turn Right     |
+| Turn Left | Turn Left      | Turn Left      | Turn Left      | Turn Left      | Turn Right     |
+| Turn Left | Turn Left      | Turn Left      | Turn Left      | Turn Right     | Turn Right     |
+| Turn Left | Turn Left      | Turn Left      | Turn Left      | Turn Left      | Turn Right     |
+| Turn Left | Turn Right     | Turn Left      | Turn Left      | Turn Right     | Turn Right     |
+| nan       | Turn Right     | Turn Left      | Turn Left      | Turn Left      | Turn Right     |
+| nan       | Turn Right     | Turn Right     | Turn Left      | Turn Left      | Turn Right     |
+| nan       | Turn Right     | Turn Right     | Turn Right     | Turn Right     | Turn Right     |
+| nan       | Turn Right     | Turn Right     | Turn Right     | Turn Right     | Turn Right     |
+| nan       | Turn Right     | Turn Right     | Turn Right     | Turn Right     | Turn Right     |
+| nan       | Turn Right     | Turn Right     | Turn Left      | Turn Left      | Turn Right     |
+| nan       | Turn Left      | Turn Right     | Turn Right     | Turn Left      | Turn Left      |
+| nan       | Go Straight    | Turn Right     | Turn Right     | Turn Right     | Turn Left      |
+| nan       | Go Straight    | Turn Right     | Turn Right     | Turn Right     | Turn Right     |
+| nan       | Idle           | Turn Right     | Turn Right     | Turn Right     | Turn Right     |
+| nan       | Idle           | Turn Right     | Turn Right     | Turn Right     | Turn Right     |
+| nan       | Idle           | Turn Right     | Turn Right     | Turn Right     | Turn Right     |
+| nan       | Go Straight    | Turn Right     | Turn Right     | Turn Right     | Turn Right     |
+| nan       | Turn Right     | Turn Right     | Turn Right     | Turn Right     | Turn Right     |
+| nan       | Turn Right     | Turn Right     | Turn Right     | Turn Right     | Turn Right     |
+| nan       | Turn Right     | Idle           | Turn Right     | Turn Right     | Turn Right     |
+| nan       | Turn Right     | Idle           | Turn Right     | Turn Right     | Turn Right     |
+| nan       | Turn Right     | Turn Right     | Turn Right     | Turn Right     | Turn Right     |
+| nan       | Idle           | Turn Right     | Turn Right     | Turn Right     | Turn Right     |
+| nan       | Idle           | Turn Right     | Turn Right     | Turn Right     | Turn Right     |
+| nan       | Turn Left      | Turn Right     | Turn Right     | Turn Right     | Turn Right     |
+| Idle      | Idle           | Turn Right     | Turn Right     | Turn Right     | Turn Right     |
+| Idle      | Turn Left      | Turn Right     | Turn Right     | Turn Right     | Turn Right     |
+| Idle      | Idle           | Turn Right     | Turn Right     | Turn Right     | Turn Right     |
+| Idle      | Turn Left      | Idle           | Turn Right     | Turn Right     | Turn Right     |
+| Idle      | Turn Right     | Idle           | Turn Right     | Turn Right     | Turn Right     |
+| Idle      | Turn Right     | Idle           | Turn Right     | Turn Right     | Turn Right     |
+| Idle      | Idle           | Idle           | Turn Right     | Turn Right     | Turn Right     |
+| Idle      | Turn Left      | Turn Left      | Turn Right     | Turn Right     | Turn Right     |
+| Idle      | Turn Left      | Idle           | Turn Right     | Turn Right     | Turn Right     |
+| Idle      | Turn Right     | Two-Stage Left | Idle           | Turn Right     | Turn Right     |
+| Idle      | Two-Stage Left | Turn Right     | Idle           | Turn Right     | Turn Right     |
+| Idle      | Turn Left      | Turn Left      | Idle           | Turn Right     | Turn Right     |
+| Idle      | Two-Stage Left | Turn Left      | U-turn         | Turn Right     | Turn Right     |
+| Idle      | Idle           | Two-Stage Left | Two-Stage Left | Turn Right     | Turn Right     |
+| Idle      | Turn Left      | Two-Stage Left | Two-Stage Left | Turn Right     | Turn Right     |
+| Idle      | Idle           | Two-Stage Left | Two-Stage Left | Idle           | Idle           |
+| Idle      | Idle           | Turn Left      | Turn Left      | Idle           | Turn Right     |
+| Idle      | Idle           | Turn Left      | Turn Left      | Idle           | Turn Right     |
+| Idle      | Idle           | Idle           | Turn Left      | Idle           | Turn Right     |
+| Idle      | Idle           | Idle           | Turn Left      | Turn Left      | Turn Right     |
