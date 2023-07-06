@@ -9,7 +9,7 @@
 * [第二章 相關工作](./Chapters/第二章%20相關工作.md)
   * [2.1 駕駛行為辨識](./Chapters/第二章%20相關工作.md#21)
   * [2.2 分群K-means演算法的原理與應用](./Chapters/第二章%20相關工作.md#22)
-    * [2.2.1 K-means分群](./Chapters/第二章%20相關工作.md#駕駛行為辨識)
+    * [2.2.1 K-means分群](./Chapters/第二章%20相關工作.md#221)
     * [2.2.2 Silhouette Score](./Chapters/第二章%20相關工作.md#222)
     * [2.2.3 Calinski-Harabasz Index](./Chapters/第二章%20相關工作.md#223)
     * [2.2.4 Davies-Bouldin Index](./Chapters/第二章%20相關工作.md#224)
