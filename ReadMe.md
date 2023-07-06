@@ -646,6 +646,14 @@ $$
 
 ### 4.3.2 各特徵分3部分 <a id="432"></a>
 
+![傳統1968分群](https://github.com/Yen-Wei-Liang/Driving-Behavior-Evaluation-System/assets/127264553/220af8eb-f8a1-426d-9f89-ab915baa4cd7)
+
+
+
+| RideTrack        | Idle       | Go Straight    | Turn Right   | U-turn     | Turn Left    | Two-Stage Left   | Accuracy (Total)   |
+|:-----------:  |:-----------:   |:-----------: |:-----------:  |:-----------:  |:-----------: |:-----------: |:-----------:|
+| Predict          | 93.950178  | 4.385965       | 69.868996    | 70.00      | 92.372881    | 49.726776        | 77.409062          |
+| Filter_Predict   | 94.780546  | 0.000000       | 72.925764    | 86.25      | 92.372881    | 54.644809        | 79.387364          |
 
 
 | Action         |   Predicted: Go Straight |   Predicted: Idle |   Predicted: Turn Left |   Predicted: Turn Right |   Predicted: Two-Stage Left |   Predicted: U-turn |   Accuracy |
