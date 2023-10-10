@@ -11,9 +11,16 @@ from filterpy.kalman import KalmanFilter
 from tqdm import tqdm
 import numpy as np
 import tensorflow as tf
-from tensorflow.keras.models import Sequential, load_model
-from tensorflow.keras.layers import Dense
+
 from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.models import Sequential, load_model, Model
+from tensorflow.keras.layers import BatchNormalization, LeakyReLU, Dense, Dropout
+from tensorflow.keras.layers import Input, Conv1D, MaxPooling1D, Flatten, ReLU
+from tensorflow.keras.callbacks import ModelCheckpoint
+
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score, f1_score, recall_score
+from sklearn.metrics import silhouette_score, calinski_harabasz_score, davies_bouldin_score
 
 class NoiseFilter:
 
@@ -23,6 +30,7 @@ class NoiseFilter:
 
         Note: This function will print out the guide to console.
         """
+        
         intro = """
          .----------------.  .----------------.  .----------------.  .----------------.   
         | .--------------. || .--------------. || .--------------. || .--------------. |  
@@ -65,22 +73,20 @@ class NoiseFilter:
         self.half_fs = None
 
 
-    #################################### filter_and_denoise 功能模塊 Start ####################################
-
-    # 濾波器副程式    
+    # 高/低/帶通濾波器副程式    
     def butter_filter(self, signal, cutoff, fs, order=4, btype='low'):
         if self.half_fs is None or self.half_fs != 0.5 * fs:
             self.half_fs = 0.5 * fs
         b, a = butter(order, np.array(cutoff) / self.half_fs, btype=btype)
         return filtfilt(b, a, signal)
     
-    # 濾波器副程式
+    # 高/低/帶通濾波器副程式
     def plot_signal(self, subplot_idx, title, t, signal):
         plt.subplot(4, 1, subplot_idx)
         plt.title(title)
         plt.plot(t, signal)
     
-    # 濾波器副程式
+    # 高/低/帶通濾波器副程式
     def select_filter_output(self, filter_type, y_low, y_high, y_band):
         if filter_type == 'low':
             return y_low
@@ -192,10 +198,66 @@ class NoiseFilter:
 
 
 
+#####################################  資料正規化  start #################################################
+
+    def normalize_data(self, dataset, feature, method="minmax", save_path=None):
+        """
+        Function: Normalize specified feature in dataset.
+
+        Parameters:
+            dataset: The dataframe containing the data to normalize.
+            feature: The column(s) in the dataframe to normalize.
+            method: The normalization method to use. Options are "minmax", "standard", "robust".
+            save_path: Path to save normalized data. If None, data will not be saved.
+
+        Returns:
+            normalized_df: The dataframe after normalization.
+        """
+
+        # 定義一個字典來映射方法名稱到相應的類
+        methods = {
+            "minmax": MinMaxScaler,
+            "standard": StandardScaler,
+            "robust": RobustScaler
+        }
+
+        # 檢查指定的方法是否存在
+        if method not in methods:
+            raise ValueError(f"Invalid method. Expected one of: {list(methods.keys())}")
+
+        # 創建相應的物件
+        scaler = methods[method]()
+
+        # 對指定特徵進行正規化
+        normalized_data = scaler.fit_transform(dataset[feature])
+
+        # 將正規化後的資料轉換為DataFrame
+        normalized_df = pd.DataFrame(normalized_data, columns=feature)
+
+        return normalized_df
+
+
+########################################################################################################
+
+
+
+
+
+
 class SignalModel:
-    pass
+
+    def __init__(self, name):
+        self.name = name
+    
+    def preprocess(self, x):
+        print(f"Preprocessing data for {self.name}")
+        # 共同的預處理步驟
+        return x
+
 
 class TraditionalFFTModel(SignalModel):
+    def __init__(self):
+        super().__init__("Traditional FFT Model")
 
     def Introduction(self):
         """
@@ -263,7 +325,7 @@ class TraditionalFFTModel(SignalModel):
         magnitude = np.abs(fft_values)
         avg_magnitude = np.mean(magnitude)
     
-        # 設定頻率範圍
+        # 設定偵測頻率範圍  (主頻率附近並非剛好是主頻率)
         tolerance = 0.1
         second_harmonic_range = [2 * main_freq * (1 - tolerance), 2 * main_freq * (1 + tolerance)]
         third_harmonic_range = [3 * main_freq * (1 - tolerance), 3 * main_freq * (1 + tolerance)]
@@ -315,73 +377,198 @@ class TraditionalFFTModel(SignalModel):
 
 
 
-class SignalModel:
-    # 共同的方法和屬性
-    pass
-
-
-
+# 多模型、snapshut與windows式              (缺LSTM與分群演算法)
 class SimpleAIModel(SignalModel):
-    # 簡單AI特有的方法和屬性
-    pass
+
+    def __init__(self):
+        super().__init__("Simple AI Model")
+        self.models = [
+            ('Support Vector Machines', svm.SVC()), 
+            ('Nearest Neighbors', KNeighborsClassifier(n_neighbors=6)), 
+            ('Decision Trees', tree.DecisionTreeClassifier()), 
+            ('Forests of randomized trees', RandomForestClassifier(n_estimators=10)), 
+            ('Neural Network models', MLPClassifier(solver='adam', alpha=1e-5, hidden_layer_sizes=(100,), random_state=42, activation='relu')),
+            ('GaussianProcess', GaussianProcessClassifier())
+        ]
+
+    # 儲存檔案使用
+    @staticmethod
+    def _save_dataframe(df, path):
+        """
+        Function: Save dataframe to csv.
+
+        Parameters:
+            df: The dataframe to be saved.
+            path: The path to save the dataframe.
+        """
+        df.to_csv(path)
+
+        
+
+    def _train_and_evaluate(self, model, train_dataset, test_dataset, feature):
+        model_name, model_instance = model
+        model_instance.fit(train_dataset[feature], train_dataset['Action'])
+        test_predict = model_instance.predict(test_dataset[feature])
+        acc = metrics.accuracy_score(test_dataset['Action'], test_predict)
+        f1 = f1_score(test_dataset['Action'], test_predict, average='weighted')
+        recall = recall_score(test_dataset['Action'], test_predict, average='weighted')
+        confusion_mat = confusion_matrix(test_dataset['Action'], test_predict)
+        return model_name, acc, f1, recall, confusion_mat
+
+    def compare_ml_models(self, train_dataset, test_dataset, feature, save_path=None):
+
+        results = []
+        confusion_matrices = {}
+        for model in self.models:
+            model_name, acc, f1, recall, confusion_mat = self._train_and_evaluate(model, train_dataset, test_dataset, feature)
+            results.append((model_name, acc, f1, recall))
+            confusion_matrices[model_name] = confusion_mat
+
+        results_df = pd.DataFrame(results, columns=['Model', 'Accuracy', 'F1_Score', 'Recall'])
+        if save_path:
+            self._save_dataframe(results_df, save_path)
+
+        return results_df, confusion_matrices
+
+    def create_windows(self, data, feature, window_size):
+        windows = []
+        labels = []
+        for i in range(window_size, len(data)):
+            windows.append(data[feature][i-window_size:i].values)
+            labels.append(data['Action'].iloc[i])
+        return np.array(windows), np.array(labels)
+
+    def compare_m2_models(self, train_dataset, test_dataset, feature, window_size, save_path=None):
+
+        train_data, train_labels = self.create_windows(train_dataset, feature, window_size)
+        test_data, test_labels = self.create_windows(test_dataset, feature, window_size)
+
+        train_data = train_data.reshape((train_data.shape[0], -1))
+        test_data = test_data.reshape((test_data.shape[0], -1))
+ 
+        results = []
+        confusion_matrices = {}
+        for model in self.models:
+            model_name, model_instance = model
+            model_instance.fit(train_data, train_labels)
+            test_predict = model_instance.predict(test_data)
+            acc = metrics.accuracy_score(test_labels, test_predict)
+            f1 = f1_score(test_labels, test_predict, average='weighted')
+            recall = recall_score(test_labels, test_predict, average='weighted')
+            confusion_mat = confusion_matrix(test_labels, test_predict)
+            results.append((model_name, acc, f1, recall))
+            confusion_matrices[model_name] = confusion_mat
+
+        results_df = pd.DataFrame(results, columns=['Model', 'Accuracy', 'F1_Score', 'Recall'])
+        if save_path:
+            self._save_dataframe(results_df, save_path)
+
+        return results_df, confusion_matrices
+    
+
 
 class ComplexAIModel(SignalModel):
     # 複雜AI特有的方法和屬性
-    pass
+    def __init__(self):
+        super().__init__("Complex AI Model")
+
+    # CNN 方式
+    def build_and_train_model(self, X_train, y_train, X_test, y_test, model_path):
+        n_conv_layers = 5
+        n_dense_units = 128
+        dropout_rate = 0.1
+        filter_size = 9
+        learning_rate = 0.0001
+        n_epochs = 100
+    
+        weight_for_0 = len(y_train) / (2 * len(y_train[y_train == 0]))
+        weight_for_1 = len(y_train) / (2 * len(y_train[y_train == 1]))
+        class_weight = {0: weight_for_0, 1: weight_for_1}
+    
+        X_in = Input(shape=(X_train.shape[1], 1))
+        x = X_in
+        for j in range(n_conv_layers):
+            x = Conv1D(filters=(j + 1) * 10, kernel_size=filter_size, activation='linear')(x)
+            x = BatchNormalization()(x)
+            x = LeakyReLU(alpha=0.05)(x)
+            x = MaxPooling1D(pool_size=5, strides=2)(x)
+        x = Flatten()(x)
+        x = Dense(units=n_dense_units, activation='linear')(x)
+        x = ReLU()(x)
+        x = Dropout(rate=dropout_rate)(x)
+        X_out = Dense(units=1, activation='sigmoid')(x)
+    
+        model = Model(X_in, X_out)
+        model.compile(optimizer=Adam(lr=learning_rate), loss='binary_crossentropy', metrics=['accuracy'])
+    
+        best_model_filepath = f"{model_path}/best_model.h5"
+        checkpoint = ModelCheckpoint(best_model_filepath, monitor='val_loss', save_best_only=True, mode='min')
+    
+        model.fit(X_train, y_train, epochs=n_epochs, batch_size=64, validation_data=(X_test, y_test),
+                  callbacks=[checkpoint], class_weight=class_weight)
+    
+        model = load_model(best_model_filepath)
+        return model
+
+    def predict_current_state(self, model, X_val):
+        return model.predict(X_val)
+
+# Example usage:
+# model = build_and_train_model(X_train, y_train, X_test, y_test, 'model_path_here')
+# predictions = predict_current_state(model, X_val)
 
 
+    
+    ## FFT + NLP (維修中) #######################################################################################
+    def fft_fcn_signal_model(self, signal, model_path=None):
+        # FFT 轉換
+        fft_values = np.fft.fft(signal)
+        magnitude = np.abs(fft_values)
+    
+        # 數據預處理（例如，正規化）
+        magnitude = magnitude / np.max(magnitude)
+    
+        # 如果提供了模型路徑，則載入模型
+        if model_path:
+            model = load_model(model_path)
+            prediction = model.predict(magnitude.reshape(1, -1))
+            return "正常" if np.argmax(prediction) == 0 else "異常"
+    
+        # 否則，訓練一個新模型
+        else:
+            # 假設 labels 是一個與 signal 長度相同的標籤數組
+            # 0 表示正常，1 表示異常
+            labels = np.random.randint(0, 2, 1)  # 這裡只生成一個標籤，與單個訊號對應
+        
+            # 建立模型
+            model = Sequential([
+                Dense(128, activation='relu', input_shape=(len(magnitude),)),
+                Dense(64, activation='relu'),
+                Dense(32, activation='relu'),
+                Dense(16, activation='relu'),
+                Dense(2, activation='softmax')
+            ])
+        
+            # 編譯模型
+            model.compile(optimizer=Adam(), loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+        
+            # 訓練模型
+            model.fit(magnitude.reshape(1, -1), labels, epochs=10)  # 這裡也只有一個訓練樣本
+        
+            # 儲存模型（如果需要）
+            model.save("my_model.h5")
+        
+            return "模型訓練完成，已儲存為 'my_model.h5'"
+    
 
+# 模擬一個訊號
+# signal = np.sin(2 * np.pi * np.linspace(0, 1, 100))
 
+# 訓練模型
+# print(fft_fcn_signal_model(signal))
 
-
-
-
-
-
-
-
-
-#####################################  資料正規化  start #################################################
-
-    def normalize_data(self, dataset, feature, method="minmax", save_path=None):
-        """
-        Function: Normalize specified feature in dataset.
-
-        Parameters:
-            dataset: The dataframe containing the data to normalize.
-            feature: The column(s) in the dataframe to normalize.
-            method: The normalization method to use. Options are "minmax", "standard", "robust".
-            save_path: Path to save normalized data. If None, data will not be saved.
-
-        Returns:
-            normalized_df: The dataframe after normalization.
-        """
-
-        # 定義一個字典來映射方法名稱到相應的類
-        methods = {
-            "minmax": MinMaxScaler,
-            "standard": StandardScaler,
-            "robust": RobustScaler
-        }
-
-        # 檢查指定的方法是否存在
-        if method not in methods:
-            raise ValueError(f"Invalid method. Expected one of: {list(methods.keys())}")
-
-        # 創建相應的物件
-        scaler = methods[method]()
-
-        # 對指定特徵進行正規化
-        normalized_data = scaler.fit_transform(dataset[feature])
-
-        # 將正規化後的資料轉換為DataFrame
-        normalized_df = pd.DataFrame(normalized_data, columns=feature)
-
-        return normalized_df
-
-
-########################################################################################################
-
+# 使用預訓練的模型進行預測
+# print(fft_fcn_signal_model(signal, model_path="my_model.h5"))
 
 
 
@@ -395,55 +582,3 @@ if __name__ == '__main__':
 
 
 
-
-
-
-def fft_fcn_signal_model(signal, model_path=None):
-    # FFT 轉換
-    fft_values = np.fft.fft(signal)
-    magnitude = np.abs(fft_values)
-    
-    # 數據預處理（例如，正規化）
-    magnitude = magnitude / np.max(magnitude)
-    
-    # 如果提供了模型路徑，則載入模型
-    if model_path:
-        model = load_model(model_path)
-        prediction = model.predict(magnitude.reshape(1, -1))
-        return "正常" if np.argmax(prediction) == 0 else "異常"
-    
-    # 否則，訓練一個新模型
-    else:
-        # 假設 labels 是一個與 signal 長度相同的標籤數組
-        # 0 表示正常，1 表示異常
-        labels = np.random.randint(0, 2, 1)  # 這裡只生成一個標籤，與單個訊號對應
-        
-        # 建立模型
-        model = Sequential([
-            Dense(128, activation='relu', input_shape=(len(magnitude),)),
-            Dense(64, activation='relu'),
-            Dense(32, activation='relu'),
-            Dense(16, activation='relu'),
-            Dense(2, activation='softmax')
-        ])
-        
-        # 編譯模型
-        model.compile(optimizer=Adam(), loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-        
-        # 訓練模型
-        model.fit(magnitude.reshape(1, -1), labels, epochs=10)  # 這裡也只有一個訓練樣本
-        
-        # 儲存模型（如果需要）
-        model.save("my_model.h5")
-        
-        return "模型訓練完成，已儲存為 'my_model.h5'"
-    
-
-# 模擬一個訊號
-# signal = np.sin(2 * np.pi * np.linspace(0, 1, 100))
-
-# 訓練模型
-# print(fft_fcn_signal_model(signal))
-
-# 使用預訓練的模型進行預測
-# print(fft_fcn_signal_model(signal, model_path="my_model.h5"))
